@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИП Климахин В.Б. - Образовательная организация "Окружающий мир"</title>
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ОСНОВНЫЕ СТИЛИ (CSS) --- */
+        :root {
+            --primary-color: #1a5f7a; /* Основной синий */
+            --secondary-color: #2c8c99; /* Дополнительный бирюзовый */
+            --accent-color: #57cc99; /* Акцентный зеленый */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; color: var(--text-color); line-height: 1.6; background-color: #f5f7fa; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .btn { display: inline-block; padding: 10px 20px; background: var(--primary-color); color: var(--white); border-radius: 5px; cursor: pointer; border: none; font-weight: 500; }
+        .btn:hover { background: var(--secondary-color); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: var(--white); }
+
+        /* --- ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ --- */
+        body.accessibility { font-size: 20px; line-height: 1.8; background: #fff; }
+        body.accessibility * { background: #fff !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
+        body.accessibility img { filter: grayscale(100%) contrast(120%); }
+        body.accessibility .btn { border: 2px solid #000; font-weight: bold; }
+        
+        .accessibility-toggle {
+            position: fixed; top: 100px; right: 20px; z-index: 1000;
+            width: 50px; height: 50px; background: var(--primary-color); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; box-shadow: var(--shadow);
+        }
+
+        /* --- ШАПКА --- */
+        .top-header { background: var(--primary-color); color: var(--white); padding: 15px 0; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { font-size: 40px; }
+        .logo-text h1 { font-size: 1.2rem; margin: 0; font-weight: 700; text-transform: uppercase; }
+        .logo-text p { font-size: 0.9rem; opacity: 0.9; margin: 0; }
+        .header-contacts { text-align: right; font-size: 0.9rem; }
+        .header-contacts i { margin-right: 5px; color: var(--accent-color); }
+
+        /* --- НАВИГАЦИЯ --- */
+        .main-nav { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 999; }
+        .nav-list { display: flex; flex-wrap: wrap; }
+        .nav-item { position: relative; }
+        .nav-link { display: block; padding: 15px 20px; font-weight: 500; color: var(--dark-bg); }
+        .nav-link:hover { color: var(--primary-color); background: #f0f4f8; }
+        
+        /* Выпадающее меню */
+        .dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: var(--white); min-width: 300px; box-shadow: var(--shadow);
+            border-top: 3px solid var(--secondary-color);
+        }
+        .nav-item:hover .dropdown-menu { display: block; }
+        .dropdown-item { display: block; padding: 12px 20px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .dropdown-item:hover { background: #f8f9fa; color: var(--secondary-color); }
+
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) - по примеру index2 --- */
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Заглушка, можно менять через админку */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Затемнение */
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 20px; }
+        .hero-title { font-size: 3rem; font-weight: 700; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .hero-subtitle { font-size: 1.5rem; margin-bottom: 40px; font-weight: 300; }
+        .hero-btn {
+            padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;
+            background: var(--accent-color); color: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .hero-btn:hover { transform: translateY(-5px); background: #46b585; }
+
+        /* --- ОСНОВНОЙ КОНТЕНТ --- */
+        .page-content { padding: 40px 0; }
+        .section-block {
+            background: var(--white); padding: 30px; margin-bottom: 30px;
+            border-radius: 8px; box-shadow: var(--shadow); border-left: 5px solid var(--primary-color);
+        }
+        .section-title { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .info-item h4 { color: var(--secondary-color); margin-bottom: 10px; }
+        
+        /* Таблицы */
+        .table-wrap { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 12px; border: 1px solid var(--border-color); text-align: left; }
+        th { background: #f1f3f5; color: var(--primary-color); }
+
+        /* Документы */
+        .doc-link {
+            display: flex; align-items: center; padding: 10px; background: #f8f9fa;
+            border: 1px solid #eee; margin-bottom: 10px; border-radius: 4px;
+        }
+        .doc-link i { font-size: 24px; color: #e74c3c; margin-right: 15px; }
+        .doc-link span { flex-grow: 1; }
+        .doc-link:hover { background: #e9ecef; }
+
+        /* --- ПОДВАЛ --- */
+        .footer { background: var(--dark-bg); color: #adb5bd; padding: 50px 0 20px; }
+        .footer h3 { color: var(--white); margin-bottom: 20px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: #adb5bd; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* --- АДМИНКА --- */
+        .admin-controls {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #222; color: #fff; padding: 10px;
+            display: none; z-index: 10001; justify-content: space-between; align-items: center;
+        }
+        .admin-controls.active { display: flex; }
+        [contenteditable="true"] { outline: 2px dashed #ff9800; min-height: 10px; }
+        [contenteditable="true"]:focus { outline: 2px solid #ff9800; background: rgba(255,255,255,0.9); color: black; }
+        
+        .edit-img-btn {
+            position: absolute; top: 10px; right: 10px;
+            background: rgba(0,0,0,0.7); color: #fff; padding: 5px 10px;
+            border-radius: 4px; cursor: pointer; font-size: 12px; display: none;
+        }
+        .admin-mode .edit-img-btn { display: block; }
+        .admin-mode .hero-section { border: 4px dashed #ff9800; }
+
+        /* Модальное окно входа */
+        .login-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 10002;
+            display: none; align-items: center; justify-content: center;
+        }
+        .login-box { background: #fff; padding: 30px; border-radius: 8px; width: 300px; text-align: center; }
+        .login-box input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; }
+            .header-contacts { text-align: center; }
+            .nav-list { flex-direction: column; display: none; width: 100%; }
+            .nav-list.active { display: flex; }
+            .mobile-menu-btn { display: block; width: 100%; padding: 10px; background: #eee; border: none; text-align: center; }
+            .hero-title { font-size: 2rem; }
+        }
+        @media (min-width: 769px) {
+            .mobile-menu-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Кнопка для слабовидящих -->
+    <div class="accessibility-toggle" id="a11y-toggle" title="Версия для слабовидящих">
+        <i class="fas fa-eye"></i>
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="top-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <div class="logo-text editable" data-id="header_title">
+                    <h1>ИП Климахин В.Б.</h1>
+                    <p>Образовательная организация "Окружающий мир"</p>
+                </div>
+            </div>
+            <div class="header-contacts editable" data-id="header_contacts">
+                <p><i class="fas fa-map-marker-alt"></i> г. Невинномысск, ул. Свободы, д. 45А</p>
+                <p><i class="fas fa-phone"></i> 8 (906) 479-48-50</p>
+                <p><i class="fas fa-envelope"></i> miner1977@mail.ru</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- МЕНЮ -->
+    <nav class="main-nav">
+        <div class="container">
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i> Меню</button>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#" class="nav-link">Главная</a></li>
+                <li class="nav-item">
+                    <a href="#sveden" class="nav-link">Сведения об организации <i class="fas fa-chevron-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#basic" class="dropdown-item">Основные сведения</a>
+                        <a href="#structure" class="dropdown-item">Структура и органы</a>
+                        <a href="#docs" class="dropdown-item">Документы</a>
+                        <a href="#education" class="dropdown-item">Образование</a>
+                        <a href="#leadership" class="dropdown-item">Руководство</a>
+                        <a href="#faculty" class="dropdown-item">Педагогический состав</a>
+                        <a href="#material" class="dropdown-item">Материально-техническое обеспечение</a>
+                        <a href="#paid" class="dropdown-item">Платные услуги</a>
+                        <a href="#finance" class="dropdown-item">Финансовая деятельность</a>
+                        <a href="#vacancies" class="dropdown-item">Вакантные места</a>
+                        <a href="#scholarship" class="dropdown-item">Стипендии</a>
+                        <a href="#inter" class="dropdown-item">Международное сотрудничество</a>
+                        <a href="#food" class="dropdown-item">Питание</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#contacts" class="nav-link">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (ГЛАВНЫЙ ЭКРАН) -->
+    <section class="hero-section" id="hero-bg">
+        <div class="edit-img-btn" onclick="editImage('hero-bg')">Изменить фон</div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title editable" data-id="hero_title">Изучаем Окружающий мир вместе!</h1>
+            <p class="hero-subtitle editable" data-id="hero_sub">Дистанционное образование для детей и взрослых. Современные методики, доступность и качество.</p>
+            <a href="#education" class="hero-btn editable" data-id="hero_btn">Начать обучение</a>
+        </div>
+    </section>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="page-content container" id="sveden">
+        
+        <h2 style="margin-bottom: 30px; text-align: center;" class="editable" data-id="main_heading">Сведения об образовательной организации</h2>
+
+        <!-- 1. Основные сведения -->
+        <section id="basic" class="section-block">
+            <h2 class="section-title">1. Основные сведения</h2>
+            <div class="editable" data-id="sec_basic">
+                <p><strong>Полное наименование:</strong> Индивидуальный предприниматель Климахин Владислав Борисович</p>
+                <p><strong>Дата создания:</strong> 26.09.2022</p>
+                <p><strong>Учредитель:</strong> Отсутствует</p>
+                <p><strong>Место нахождения:</strong> 357115, Ставропольский край, г Невинномысск, ул. Свободы, д. 45А</p>
+                <p><strong>Режим работы:</strong> ПН-ПТ 09:00-20:00</p>
+                <p><strong>Телефон:</strong> 8 (906) 479-48-50</p>
+                <p><strong>Email:</strong> miner1977@mail.ru</p>
+                <p><strong>Место осуществления деятельности:</strong> 357115, Ставропольский край, г Невинномысск, ул. Свободы, д. 45А</p>
+                <br>
+                <p><strong>Лицензия:</strong> <a href="#" class="btn btn-outline">Скачать выписку из реестра лицензий</a></p>
+            </div>
+        </section>
+
+        <!-- 2. Структура -->
+        <section id="structure" class="section-block">
+            <h2 class="section-title">2. Структура и органы управления</h2>
+            <div class="editable" data-id="sec_struct">
+                <p><strong>Орган управления:</strong> Индивидуальный предприниматель Климахин Владислав Борисович</p>
+                <p><strong>Руководитель:</strong> Климахин Владислав Борисович</p>
+                <p><strong>Должность:</strong> Индивидуальный предприниматель</p>
+                <p><strong>Адрес:</strong> 357115, Ставропольский край, г Невинномысск, ул. Свободы, д. 45А</p>
+                <p><strong>Сайт структурного подразделения:</strong> отсутствует</p>
+                <p><strong>Email:</strong> miner1977@mail.ru</p>
+                <p><strong>Положение:</strong> <a href="#">Скачать положение (PDF)</a></p>
+            </div>
+        </section>
+
+        <!-- 3. Документы -->
+        <section id="docs" class="section-block">
+            <h2 class="section-title">3. Документы</h2>
+            <div class="editable" data-id="sec_docs">
+                <div class="info-grid">
+                    <div class="doc-link"><i class="far fa-file-pdf"></i> <span>Устав: Отсутствует</span></div>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Правила внутреннего распорядка обучающихся (Скачать)</span></a>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Правила внутреннего трудового распорядка (Скачать)</span></a>
+                    <div class="doc-link"><i class="far fa-file-pdf"></i> <span>Коллективный договор: Отсутствует</span></div>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Правила приема обучающихся (Скачать)</span></a>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Режим занятий обучающихся (Скачать)</span></a>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Порядок текущего контроля успеваемости (Скачать)</span></a>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Порядок перевода и отчисления (Скачать)</span></a>
+                    <a href="#" class="doc-link"><i class="far fa-file-pdf"></i> <span>Порядок оформления отношений (Скачать)</span></a>
+                </div>
+                <p><strong>Отчет о самообследовании:</strong> Отсутствует</p>
+                <p><strong>Предписания органов контроля:</strong> Отсутствует</p>
+            </div>
+        </section>
+
+        <!-- 4. Образование -->
+        <section id="education" class="section-block">
+            <h2 class="section-title">4. Образование</h2>
+            <div class="editable" data-id="sec_edu">
+                <h3>Программа «Окружающий мир»</h3>
+                <p><strong>Вид:</strong> Дополнительная общеразвивающая программа</p>
+                <p><strong>Форма обучения:</strong> Исключительно дистанционная</p>
+                <p><strong>Срок обучения:</strong> 12 ак. часов (3 недели)</p>
+                <p><strong>Язык:</strong> Русский</p>
+                <p><strong>Практика:</strong> Отсутствует</p>
+                <p><strong>Технологии:</strong> Электронное обучение, дистанционные технологии без отрыва от работы.</p>
+                
+                <h4>Описание программы:</h4>
+                <p>Актуальность программы заключается в том, что она рассказывает о месте, где мы живем, и о том, как лучше жить в нашем мире (в комфорте и безопасности). Направленность – социально-гуманитарная.</p>
+                
+                <div style="margin: 15px 0;">
+                    <a href="#" class="btn">Скачать программу</a>
+                    <a href="#" class="btn btn-outline">Учебный план</a>
+                </div>
+
+                <h4>Модули (Аннотации):</h4>
+                <ul>
+                    <li><strong>Модуль 1. Человек и природа.</strong> Изучение основ природных явлений, мира растений и животных. (<a href="#">Скачать РП</a>)</li>
+                    <li><strong>Модуль 2. Человек и общество. Родина.</strong> Изучение основ общества, семьи, значения Родины. (<a href="#">Скачать РП</a>)</li>
+                    <li><strong>Модуль 3. Ценность ЗОЖ. Основы безопасности.</strong> Режим дня, ЗОЖ, правила безопасности. (<a href="#">Скачать РП</a>)</li>
+                </ul>
+
+                <h4>Численность обучающихся:</h4>
+                <div class="table-wrap">
+                    <table>
+                        <tr>
+                            <th>Программа</th>
+                            <th>Бюджет (РФ)</th>
+                            <th>Бюджет (Субъект)</th>
+                            <th>Местный бюджет</th>
+                            <th>Платные (Физ/Юр лица)</th>
+                            <th>Общая</th>
+                        </tr>
+                        <tr>
+                            <td>Окружающий мир</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Руководство -->
+        <section id="leadership" class="section-block">
+            <h2 class="section-title">5. Руководство</h2>
+            <div class="editable" data-id="sec_leader">
+                <p><strong>Руководитель:</strong> Климахин Владислав Борисович</p>
+                <p><strong>Должность:</strong> Индивидуальный предприниматель</p>
+                <p><strong>Телефон:</strong> 8 (906) 479-48-50</p>
+                <p><strong>Email:</strong> miner1977@mail.ru</p>
+            </div>
+        </section>
+
+        <!-- 6. Педагогический состав -->
+        <section id="faculty" class="section-block">
+            <h2 class="section-title">6. Педагогический состав</h2>
+            <div class="editable" data-id="sec_faculty">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>ФИО</th>
+                                <th>Должность</th>
+                                <th>Образование</th>
+                                <th>Предметы</th>
+                                <th>Квалификация/Опыт</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Иванов И.И. (Пример)</td>
+                                <td>Педагог</td>
+                                <td>Высшее</td>
+                                <td>Окружающий мир</td>
+                                <td>10 лет</td>
+                            </tr>
+                            <!-- Добавлять строки здесь -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Материально-техническое -->
+        <section id="material" class="section-block">
+            <h2 class="section-title">7. Материально-техническое обеспечение</h2>
+            <div class="editable" data-id="sec_mat">
+                <p><strong>Учебные кабинеты/Практика/Библиотека/Спорт:</strong> Отсутствуют (дистанционное обучение).</p>
+                <h4>Электронные ресурсы:</h4>
+                <ul>
+                    <li>Национальная электронная детская библиотека: <a href="https://nebdeti.ru/" target="_blank">nebdeti.ru</a></li>
+                    <li>Платформа обучения BIZON365: <a href="https://start.bizon365.ru/" target="_blank">start.bizon365.ru</a></li>
+                </ul>
+                <p><strong>Доступная среда:</strong> Обучение исключительно дистанционно. Специальные тех. средства не требуются.</p>
+            </div>
+        </section>
+
+        <!-- 8. Платные услуги -->
+        <section id="paid" class="section-block">
+            <h2 class="section-title">8. Платные образовательные услуги</h2>
+            <div class="editable" data-id="sec_paid">
+                <p><a href="#" class="doc-link">Договор двухсторонний (Скачать PDF)</a></p>
+                <p><a href="#" class="doc-link">Договор трехсторонний (Скачать PDF)</a></p>
+                <p><a href="#" class="doc-link">Положение об оказании платных услуг (Скачать PDF)</a></p>
+                <p><a href="#" class="doc-link">Приказ об утверждении стоимости (Скачать PDF)</a></p>
+                <p><strong>Плата за присмотр и уход:</strong> Отсутствует</p>
+            </div>
+        </section>
+
+        <!-- 9. Финансово-хозяйственная -->
+        <section id="finance" class="section-block">
+            <h2 class="section-title">9. Финансово-хозяйственная деятельность</h2>
+            <div class="editable" data-id="sec_fin">
+                <p>Бюджетное финансирование: Отсутствует</p>
+                <p>Поступление/Расходование средств: Отсутствует</p>
+                <p>План ФХД: Отсутствует</p>
+            </div>
+        </section>
+
+        <!-- 10. Вакантные места -->
+        <section id="vacancies" class="section-block">
+            <h2 class="section-title">10. Вакантные места для приема</h2>
+            <div class="editable" data-id="sec_vac">
+                 <div class="table-wrap">
+                    <table>
+                        <tr>
+                            <th>Программа</th>
+                            <th>Бюджет (РФ)</th>
+                            <th>Бюджет (Субъект)</th>
+                            <th>Местный</th>
+                            <th>Платные</th>
+                        </tr>
+                        <tr>
+                            <td>Окружающий мир</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>Вакансии есть</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11, 12, 13 Остальные разделы -->
+        <section id="scholarship" class="section-block">
+            <h2 class="section-title">11. Стипендии и меры поддержки</h2>
+            <div class="editable" data-id="sec_schol">
+                <p>Стипендии, общежитие, интернат: Отсутствуют (дистанционно).</p>
+            </div>
+        </section>
+
+        <section id="inter" class="section-block">
+            <h2 class="section-title">12. Международное сотрудничество</h2>
+            <div class="editable" data-id="sec_inter">
+                <p>Договоры с иностранными организациями: Отсутствуют.</p>
+                <p>Международная аккредитация: Отсутствует.</p>
+            </div>
+        </section>
+
+        <section id="food" class="section-block">
+            <h2 class="section-title">13. Организация питания</h2>
+            <div class="editable" data-id="sec_food">
+                <p>Организация питания отсутствует в связи с реализацией программ исключительно дистанционно.</p>
+            </div>
+        </section>
+        
+        <!-- Контакты -->
+        <section id="contacts" class="section-block">
+             <h2 class="section-title">Контакты</h2>
+             <div class="editable" data-id="footer_contacts">
+                <p><strong>Адрес:</strong> 357115, Ставропольский край, г. Невинномысск, ул. Свободы, д. 45А</p>
+                <p><strong>Телефон:</strong> 8 (906) 479-48-50</p>
+                <p><strong>Email:</strong> miner1977@mail.ru</p>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="header-content" style="align-items: flex-start;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3>ИП Климахин В.Б.</h3>
+                    <p>Образовательная организация</p>
+                    <p>Лицензия №....</p>
+                </div>
+                <div class="footer-links" style="flex: 1; min-width: 250px;">
+                    <h3>Навигация</h3>
+                    <a href="#basic">Основные сведения</a>
+                    <a href="#docs">Документы</a>
+                    <a href="#education">Образование</a>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h3>Связь</h3>
+                    <p>miner1977@mail.ru</p>
+                    <p>8 (906) 479-48-50</p>
+                    <!-- Скрытая кнопка для админки -->
+                    <span onclick="openAdminLogin()" style="cursor: pointer; opacity: 0.1;">Admin</span>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023-2024 ИП Климахин В.Б. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- АДМИН ПАНЕЛЬ (СКРЫТАЯ) -->
+    <div class="admin-controls" id="adminPanel">
+        <span>Режим редактирования активен</span>
+        <div>
+            <button class="btn btn-outline" style="border-color: #fff; color: #fff;" onclick="saveChanges()">Сохранить изменения</button>
+            <button class="btn" style="background: #e74c3c;" onclick="logoutAdmin()">Выйти</button>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ВХОДА -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <h3>Вход администратора</h3>
+            <input type="password" id="adminPass" placeholder="Введите пароль">
+            <button class="btn" onclick="checkLogin()">Войти</button>
+            <button class="btn btn-outline" style="margin-top: 10px;" onclick="closeLogin()">Отмена</button>
+        </div>
+    </div>
+
+    <script>
+        /* --- СКРИПТЫ --- */
+
+        // 1. Мобильное меню
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navList = document.querySelector('.nav-list');
+        menuBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // 2. Версия для слабовидящих
+        const a11yBtn = document.getElementById('a11y-toggle');
+        a11yBtn.addEventListener('click', () => {
+            document.body.classList.toggle('accessibility');
+            // Сохранение настройки
+            localStorage.setItem('accessibility', document.body.classList.contains('accessibility'));
+        });
+        
+        // Восстановление настройки доступности
+        if(localStorage.getItem('accessibility') === 'true') {
+            document.body.classList.add('accessibility');
+        }
+
+        // 3. АДМИН-ПАНЕЛЬ (LOGIC)
+        const contentIds = document.querySelectorAll('.editable');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginModal = document.getElementById('loginModal');
+        const correctPass = "admin"; // ПАРОЛЬ АДМИНИСТРАТОРА
+
+        // Загрузка контента из LocalStorage при старте
+        window.addEventListener('load', () => {
+            contentIds.forEach(el => {
+                const id = el.getAttribute('data-id');
+                const saved = localStorage.getItem('site_content_' + id);
+                if (saved) {
+                    el.innerHTML = saved;
+                }
+            });
+            // Загрузка фона
+            const savedBg = localStorage.getItem('site_bg_hero-bg');
+            if(savedBg) {
+                document.getElementById('hero-bg').style.backgroundImage = `url('${savedBg}')`;
+            }
+        });
+
+        // Открытие окна входа (Ctrl + M или клик в футере)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && (e.key === 'm' || e.key === 'ь')) {
+                e.preventDefault();
+                openAdminLogin();
+            }
+        });
+
+        function openAdminLogin() {
+            if(document.body.classList.contains('admin-mode')) {
+                logoutAdmin();
+            } else {
+                loginModal.style.display = 'flex';
+            }
+        }
+
+        function closeLogin() {
+            loginModal.style.display = 'none';
+        }
+
+        function checkLogin() {
+            const pass = document.getElementById('adminPass').value;
+            if (pass === correctPass) {
+                enableAdminMode();
+                closeLogin();
+                document.getElementById('adminPass').value = '';
+            } else {
+                alert('Неверный пароль!');
+            }
+        }
+
+        function enableAdminMode() {
+            document.body.classList.add('admin-mode');
+            adminPanel.classList.add('active');
+            contentIds.forEach(el => {
+                el.setAttribute('contenteditable', 'true');
+            });
+        }
+
+        function logoutAdmin() {
+            document.body.classList.remove('admin-mode');
+            adminPanel.classList.remove('active');
+            contentIds.forEach(el => {
+                el.removeAttribute('contenteditable');
+            });
+            alert('Вы вышли из режима редактирования');
+        }
+
+        function saveChanges() {
+            contentIds.forEach(el => {
+                const id = el.getAttribute('data-id');
+                localStorage.setItem('site_content_' + id, el.innerHTML);
+            });
+            alert('Все изменения сохранены!');
+        }
+
+        // Функция изменения картинки фона
+        function editImage(elementId) {
+            const url = prompt("Введите ссылку на новое изображение (URL):");
+            if (url) {
+                document.getElementById(elementId).style.backgroundImage = `url('${url}')`;
+                localStorage.setItem('site_bg_' + elementId, url);
+            }
+        }
+    </script>
+</body>
+</html>
